@@ -18,16 +18,16 @@ jobs:
         with:
           java-version: 11
       - name: Build
-          run: ./mvnw clean package -Dquarkus.package.type=uber-jar -B
-            - name: install ssh key
-              uses: webfactory/ssh-agent@v0.4.1
-              with:
-                ssh-private-key: ${{ secrets.ORAVM }}
-            - name: create .ssh/known_hosts
-              run: |
-                ssh-keyscan -H -t rsa -v 158.101.167.157  >> ~/.ssh/known_hosts
-            - name: copy binaries to oravm
-              run: |
-                echo "Hallo ich bin hier"
-                ls -l target/
-                scp target/actions-demo-1.0.0-SNAPSHOT-runner.jar ubuntu@158.101.167.157:
+        run: ./mvnw clean package -Dquarkus.package.type=uber-jar -B
+      - name: install ssh key
+        uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.ORAVM }}
+      - name: create .ssh/known_hosts
+        run: |
+          ssh-keyscan -H -t rsa -v 130.61.156.61  >> ~/.ssh/known_hosts
+      - name: copy binaries to oravm
+        run: |
+          echo "Hallo ich bin hier"
+          ls -l target/
+          scp target/actions-demo-1.0.0-SNAPSHOT-runner.jar ubuntu@158.101.167.157:
