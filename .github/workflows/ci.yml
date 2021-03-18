@@ -25,9 +25,10 @@ jobs:
           ssh-private-key: ${{ secrets.ORAVM }}
       - name: create .ssh/known_hosts
         run: |
-          ssh-keyscan -H -t rsa -v 130.61.156.61  >> ~/.ssh/known_hosts
+          ssh-keyscan -H -t rsa -v ${{ secrets.ORAVM_IP }}  >> ~/.ssh/known_hosts
       - name: copy binaries to oravm
         run: |
           echo "Hallo ich bin hier"
           ls -l target/
-          scp target/actions-demo-1.0.0-SNAPSHOT-runner.jar ubuntu@158.101.167.157:
+          scp target/gh-actions-demo-4ahif-gr1-1.0.0-SNAPSHOT-runner.jar ${{ secrets.ORAVM_USER }}@${{ secrets.ORAVM_IP }}:
+
